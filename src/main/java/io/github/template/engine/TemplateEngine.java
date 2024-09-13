@@ -1,9 +1,9 @@
-package com.rwto.template.engine;
+package io.github.template.engine;
 
 
-import com.rwto.template.engine.exception.ErrorMsg;
-import com.rwto.template.engine.exception.TemplateException;
-import com.rwto.template.engine.parse.TemplateParser;
+import io.github.template.engine.exception.ErrorMsg;
+import io.github.template.engine.exception.TemplateException;
+import io.github.template.engine.parse.TemplateParser;
 
 import java.util.List;
 

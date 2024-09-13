@@ -1,4 +1,4 @@
-package com.rwto.template.engine.annotation;
+package io.github.template.engine.annotation;
 
 import java.lang.annotation.*;
 

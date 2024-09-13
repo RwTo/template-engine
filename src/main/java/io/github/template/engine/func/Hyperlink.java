@@ -1,8 +1,8 @@
-package com.rwto.template.engine.func;
+package io.github.template.engine.func;
 
 
-import com.rwto.template.engine.exception.ErrorMsg;
-import com.rwto.template.engine.exception.TemplateException;
+import io.github.template.engine.exception.ErrorMsg;
+import io.github.template.engine.exception.TemplateException;
 
 /**
  * @author renmw

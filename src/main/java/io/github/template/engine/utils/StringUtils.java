@@ -1,4 +1,4 @@
-package com.rwto.template.engine.utils;
+package io.github.template.engine.utils;
 
 public class StringUtils {
 
