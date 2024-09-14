@@ -6,7 +6,6 @@ package io.github.template.engine.exception;
  **/
 public enum ErrorMsg {
     PARAMETER_ILLEGAL("parameter illegality"),
-    NEED_PARSER("need parser")
     ;
 
     private String errorMsg;

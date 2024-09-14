@@ -4,11 +4,11 @@ import java.lang.annotation.*;
 
 /**
  * @author renmw
- * @create 2024/5/5 10:50
+ * @create 2024/9/14 22:20
  **/
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface TemplateParam {
+@Target(ElementType.TYPE)
+public @interface TemplateModel {
     String value();
 }

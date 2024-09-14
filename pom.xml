@@ -6,7 +6,7 @@
 
     <groupId>io.github.rwto</groupId>
     <artifactId>template-engine</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 
     <packaging>jar</packaging>
 
@@ -60,6 +60,13 @@
     </distributionManagement>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

@@ -9,13 +9,9 @@ public class TemplateConstant {
     public static final String REGEX_FIELD = "\\$\\{([0-9a-zA-Z_.]+)\\}";
     public static final String REGEX_FUNC = "\\$([0-9a-zA-Z-_.]+)\\((([^()])*)\\)";
 
-    public static final String REGEX_TABLE = "(<table[^>]*>)(?s)(.*?)<\\/table>";
-    public static final String REGEX_TR = "(<tr[^>]*>)(?s)(.*?)<\\/tr>";
-    public static final String REGEX_TH = "(<th[^>]*>)(?s)(.*?)<\\/th>";
-    public static final String REGEX_TD = "(<td[^>]*>)(?s)(.*?)<\\/td>";
-
-    public static final String TABLE_SUFFIX = "</table>";
-    public static final String TR_SUFFIX = "</tr>";
-    public static final String TH_SUFFIX = "</th>";
-    public static final String TD_SUFFIX = "</td>";
+    /*(?s) 启动单行模式， .可以匹配换行符\n*/
+    public static final String REGEX_TABLE = "(<table[^>]*>)(?s)(.*?)(<\\/table>)";
+    public static final String REGEX_ROW = "(<tr[^>]*>)(?s)(.*?)(<\\/tr>)";
+    /* \2 反向引用，用于匹配一个先前捕获的组，2代表第二个group 即(th|td) */
+    public static final String REGEX_COLUMN = "(<(th|td)[^>]*>)(?s)(.*?)(<\\/\\2>)";
 }

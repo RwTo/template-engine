@@ -9,10 +9,17 @@ import java.util.Map;
  * @create 2024/5/12 21:07
  **/
 public class FunctionManger {
-    private final Map<String, TemplateFunc> funcMap;
+    private final Map<String, TemplateFunc> funcMap = new HashMap<>();
 
-    private FunctionManger(Map<String, TemplateFunc> funcMap) {
-        this.funcMap = funcMap;
+    {
+        DateTimeFormat dateTimeFormat = DateTimeFormat.getInstance();
+        funcMap.put(dateTimeFormat.getFuncName(),dateTimeFormat);
+
+        Now now = Now.getInstance();
+        funcMap.put(now.getFuncName(),now);
+
+        Hyperlink hyperlink = Hyperlink.getInstance();
+        funcMap.put(hyperlink.getFuncName(),hyperlink);
     }
 
 
@@ -20,33 +27,7 @@ public class FunctionManger {
         return funcMap.get(funcName);
     }
 
-    public static FunctionMangerBuilder builder(){
-         return new FunctionMangerBuilder();
-    }
-
-    public static class FunctionMangerBuilder{
-
-        private final Map<String, TemplateFunc> funcMap = new HashMap<>();
-
-        {
-            DateTimeFormat dateTimeFormat = DateTimeFormat.getInstance();
-            funcMap.put(dateTimeFormat.getFuncName(),dateTimeFormat);
-
-            Now now = Now.getInstance();
-            funcMap.put(now.getFuncName(),now);
-
-            Hyperlink hyperlink = Hyperlink.getInstance();
-            funcMap.put(hyperlink.getFuncName(),hyperlink);
-        }
-
-
-        public FunctionMangerBuilder addFunc(String funcName, TemplateFunc func){
-            funcMap.put(funcName,func);
-            return this;
-        }
-
-        public FunctionManger build(){
-            return new FunctionManger(funcMap);
-        }
+    public void addFunc(String funcName, TemplateFunc func){
+        this.funcMap.put(funcName,func);
     }
 }

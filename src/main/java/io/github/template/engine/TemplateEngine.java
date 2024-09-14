@@ -1,11 +1,15 @@
 package io.github.template.engine;
 
 
-import io.github.template.engine.exception.ErrorMsg;
-import io.github.template.engine.exception.TemplateException;
-import io.github.template.engine.parse.TemplateParser;
+import io.github.template.engine.domain.ConvertSource;
+import io.github.template.engine.element.TemplateElement;
+import io.github.template.engine.func.FunctionManger;
+import io.github.template.engine.func.TemplateFunc;
+import io.github.template.engine.utils.TemplateUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author renmw
@@ -13,10 +17,11 @@ import java.util.List;
  **/
 public class TemplateEngine {
 
-    private final TemplateParser parser;
+    private List<TemplateElement> templateElements;
+    private FunctionManger functionManger;
 
-    private TemplateEngine(TemplateParser parser) {
-        this.parser = parser;
+    private TemplateEngine(FunctionManger functionManger) {
+        this.functionManger = functionManger;
     }
 
     public static TemplateEngineBuilder builder(){
@@ -26,14 +31,13 @@ public class TemplateEngine {
     public String parseAndConvert(String tmpl, List<Object> objs){
         return this.parseTemplate(tmpl).convert(objs);
     }
+
     /**
      * 解析模板
      * @param tmpl
      */
     public TemplateEngine parseTemplate(String tmpl){
-        /*解析参数 List fields*/
-        /*解析函数*/
-        parser.parse(tmpl);
+        this.templateElements = TemplateUtils.parseTemplate(tmpl);
         return this;
     }
 
@@ -43,23 +47,36 @@ public class TemplateEngine {
      * @return
      */
     public String convert(List<Object> objs){
-        return parser.convert(objs);
+        Map<String, List<Object>> params = TemplateUtils.parseParams(objs);
+        ConvertSource convertSource = ConvertSource.builder()
+                .functionManger(this.functionManger)
+                .params(params)
+                .build();
+        StringBuilder content = new StringBuilder();
+        for (TemplateElement element : this.templateElements) {
+            content.append(element.getContent(convertSource));
+        }
+        return content.toString();
     }
 
 
-    public static class TemplateEngineBuilder{
-        private TemplateParser parser;
+    public void reset(){
+        this.templateElements = null;
+    }
 
-        public TemplateEngineBuilder setParser(TemplateParser parser){
-            this.parser = parser;
+    /**
+     * 建造者
+     */
+    public static class TemplateEngineBuilder{
+        private final FunctionManger functionManger = new FunctionManger();
+
+        public TemplateEngineBuilder addFunction(String funcName, TemplateFunc func){
+            this.functionManger.addFunc(funcName,func);
             return this;
         }
 
         public TemplateEngine build(){
-            if(null == parser){
-                throw TemplateException.build(ErrorMsg.NEED_PARSER);
-            }
-            return new TemplateEngine(parser);
+            return new TemplateEngine(functionManger);
         }
     }
 }
