@@ -3,7 +3,15 @@
 
 
 # example
+---------------------------------maven坐标---------------------------------------
+```xml
+<dependency>
+    <groupId>io.github.rwto</groupId>
+    <artifactId>template-engine</artifactId>
+    <version>2.0.0</version>
+</dependency>
 
+```
 
 ---------------------------------处理前------------------------------------------
 ![image](https://github.com/user-attachments/assets/c243dfb7-c37a-4775-a8a5-7b8066dff3c2)
